@@ -1,4 +1,4 @@
-import Flag from "./Flag"
+
 import {AiFillFire} from 'react-icons/ai'
 
 const SortedMatch = ({matchs}) => {
@@ -21,11 +21,9 @@ const SortedMatch = ({matchs}) => {
                 </h1>
                 <div className='flex justify-between'>
                     <div>
-                    <Flag flagId={item.team1}/>
                     </div>
                     <h1 className='text-sm font-semibold text-black capitalize'>vs</h1>
                     <div>
-                    <Flag flagId={item.team2}/>
                     </div>
                 </div>
                 <h1 className='text-sm font-bold text-black capitalize'>

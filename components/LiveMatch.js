@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import Flag from "./Flag"
 
 const LiveMatch = ({authKey}) => {
     const options = {hour:'2-digit',minute:'2-digit'}
@@ -38,11 +37,9 @@ const LiveMatch = ({authKey}) => {
             </h1>
             <div className='flex justify-between'>
                 <div>
-                <Flag flagId={item.team1}/>
                 </div>
                 <h1 className='text-sm font-semibold text-black capitalize'>vs</h1>
                 <div>
-                <Flag flagId={item.team2}/>
                 </div>
             </div>
             <h1 className='text-sm font-bold text-black capitalize'>

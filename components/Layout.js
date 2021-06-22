@@ -5,7 +5,7 @@ const Layout = ({title,desc,keyword,children}) => {
     return(
     <div className='bg-gray-100'>
         <Head>
-            <title>{title}</title>
+            <title>{title} | SoccerStat</title>
             <meta name='description' content={desc}/>
             <meta name='keyword' content={'sepak bola, euro, piala dunia, liga, champions, inggris, serieA, la liga, '
              + keyword} />
