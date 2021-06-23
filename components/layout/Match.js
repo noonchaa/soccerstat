@@ -1,12 +1,11 @@
-
 import {AiFillFire} from 'react-icons/ai'
 
-const SortedMatch = ({matchs}) => {
+const Match = ({matchs}) => {
     const options = {month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}
     if (!matchs.length) return <></>
 
     return(
-        <section className='bg-gray-50 pt-3 text-center' id={matchs[0].hash} >
+        <section className='bg-gray-50 pt-3 text-center'>
             <div className='bg-gray-100 mt-2 text-center'>
                 <h1 className='text-base font-semibold text-green-600 capitalize'>{matchs[0].title}</h1>
             {matchs.map((item,index)=>(
@@ -65,4 +64,4 @@ const SortedMatch = ({matchs}) => {
         </section>
     )
 }
-export default SortedMatch
+export default Match
