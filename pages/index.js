@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Layout from "../components/layout/Layout";
+import Loading from '../components/layout/Loading';
 import Match from '../components/layout/Match';
 import { SoccerKey } from '../lib/socerApi'
 
@@ -62,9 +63,13 @@ export default function Home({league}) {
     tmid='/mid.jpg'
     mfoot='/top.jpg'
     >
-      {laga.map((item,index)=>(
-        <Match key={index} matchs={item}/>
-      ))}
+    {!laga.length?
+    <Loading/>
+    :
+    laga.map((item,index)=>(
+      <Match key={index} matchs={item}/>
+    ))
+    }
     </Layout>
   )
 }

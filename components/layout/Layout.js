@@ -18,7 +18,7 @@ const Layout = ({title,desc,keyword,children,league,left,right,mtop,ttop,tmid,mf
             <meta name='keyword' content={'sepak bola, euro, piala dunia, liga, champions, inggris, serieA, la liga, '
              + keyword} />
         </Head>
-        <main className='max-w-screen-2xl mx-auto flex justify-center'>
+        <main className='max-w-screen-2xl mx-auto flex justify-center min-h-screen'>
             <SideAds img={left} link={link}/>
             <div className='w-full'>
                 <Navbar league={league}/>

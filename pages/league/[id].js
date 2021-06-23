@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Layout from '../../components/layout/Layout';
+import Loading from '../../components/layout/Loading';
 import Match from '../../components/layout/Match';
 import { SoccerKey } from '../../lib/socerApi'
 
@@ -49,7 +50,6 @@ export const getStaticProps = async ({params}) => {
 }
 
 const League = ({league,id}) => {
-    if (!league) return <h1>...Loading...</h1>
     const [laga,setLaga]=useState([])
 
     const getMatch = async () => {
@@ -59,8 +59,6 @@ const League = ({league,id}) => {
         const data = await res.json();
         const sortedData = 
         data.sort((a,b)=>a.num - b.num).
-        filter(item=>item.notMatch==undefined).
-        filter(item=>item.isCyber==false).
         filter(item=>item.name=='');
         setLaga(sortedData)
     }
@@ -68,11 +66,11 @@ const League = ({league,id}) => {
     useEffect(()=>{
         getMatch()
         return () => {setLaga([])}
-    },[])
+    },[id])
   
     return (
         <Layout
-        title='Jadwal besok'
+        title={!laga.length?'':laga[0].title}
         desc=''
         keyword=''
         league={league}
@@ -84,7 +82,11 @@ const League = ({league,id}) => {
         tmid='/mid.jpg'
         mfoot='/top.jpg'
         >
+        {!laga.length?
+            <Loading/>
+            :
             <Match matchs={laga}/>
+        }
         </Layout>
     )
 }

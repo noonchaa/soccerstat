@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import Match from "../components/layout/Match";
 import { SoccerKey } from '../lib/socerApi';
+import Loading from "../components/layout/Loading";
 
 export const getStaticProps = async () => {
     const res = await fetch('https://api.betting-api.com/fonbet/football/line/all',{
@@ -64,9 +65,13 @@ const Live = ({league}) => {
         tmid='/mid.jpg'
         mfoot='/top.jpg'
         >
-            {live.map((item,index)=>(
-                <Match key={index} matchs={item}/>
-            ))}
+        {!live.length?
+        <Loading/>
+        :
+        live.map((item,index)=>(
+          <Match key={index} matchs={item}/>
+        ))
+        }
         </Layout>
     )
 }

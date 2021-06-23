@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import Match from "../components/layout/Match";
 import { SoccerKey } from '../lib/socerApi';
+import Loading from "../components/layout/Loading";
 
 export const getStaticProps = async () => {
     const res = await fetch('https://api.betting-api.com/fonbet/football/line/all',{
@@ -63,9 +64,13 @@ const Besok = ({league}) => {
         tmid='/mid.jpg'
         mfoot='/top.jpg'
         >
-        {laga.map((item,index)=>(
-            <Match key={index} matchs={item}/>
-        ))}
+        {!laga.length?
+        <Loading/>
+        :
+        laga.map((item,index)=>(
+          <Match key={index} matchs={item}/>
+        ))
+        }
         </Layout>
     )
 }
