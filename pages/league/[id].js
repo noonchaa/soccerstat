@@ -50,6 +50,7 @@ export const getStaticProps = async ({params}) => {
 }
 
 const League = ({league,id}) => {
+    if (!league) return <Loading/>
     const [laga,setLaga]=useState([])
 
     const getMatch = async () => {
