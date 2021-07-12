@@ -1,15 +1,58 @@
-const League = ({title,number}) => {
+import { useEffect, useState } from "react"
+import Match from "./Match"
+import {useRouter} from 'next/router'
+
+const League = ({laga}) => {
+    const [today, setToday] = useState([])
+    const [nextDay, setNextDay] = useState([])
+    const [lastDay, setLastDay] = useState([])
+    const router = useRouter()
+
+    const getToday = () => {
+        setToday(laga.filter(item=>new Date(item.utcDate).getDate()===new Date().getDate()))
+        setNextDay(laga.filter(item=>new Date(item.utcDate).getDate()===new Date().getDate()+1))
+        setLastDay(laga.filter(item=>new Date(item.utcDate).getDate()===new Date().getDate()-1))
+    }
+
+    useEffect(()=>{
+        getToday()
+    },[])
+    
     return(
-        <div className='py-2 bg-gray-50 px-4 border-b border-gray-300 flex justify-between sticky top-20 lg:top-10'>
-            <h1 className='font-bold text-red-600 text-sm'>
-                {title}
-            </h1>
-            <div className='bg-gray-300 px-2'>
-                <h1 className='font-bold text-sm'>
-                    {number}
+        <>
+        <div className={router.asPath==='/'?'block':'hidden'}>
+            <div className={!today.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
+                <h1 className='capitalize text-xl font-bold'>
+                    {!today.length?'':today[0].competition.name}
                 </h1>
             </div>
+            {today.map((item,index)=>(
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+            ))}
         </div>
+
+        <div className={router.asPath==='/#lastday'?'block':'hidden'}>
+            <div className={!lastDay.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
+                <h1 className='capitalize text-xl font-bold'>
+                    {!lastDay.length?'':lastDay[0].competition.name}
+                </h1>
+            </div>
+            {lastDay.map((item,index)=>(
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+            ))}
+        </div>
+        
+        <div className={router.asPath==='/#nextday'?'block':'hidden'}>
+            <div className={!nextDay.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
+                <h1 className='capitalize text-xl font-bold'>
+                    {!nextDay.length?'':nextDay[0].competition.name}
+                </h1>
+            </div>
+            {nextDay.map((item,index)=>(
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+            ))}
+        </div>
+        </>
     )
 }
 export default League

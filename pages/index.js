@@ -1,26 +1,20 @@
 import { useEffect, useState } from 'react'
-import Layout from "../components/layout/Layout";
-import Loading from '../components/layout/Loading';
-import Match from '../components/layout/Match';
 import { SoccerKey } from '../lib/socerApi'
+import Navbar from '../components/home/Navbar';
+import League from '../components/home/League';
+import Image from 'next/image'
+import Sidebar from '../components/home/Sidebar';
 
 export const getStaticProps = async () => {
-    const res = await fetch('https://api.betting-api.com/fonbet/football/line/all',{
-        method:'GET', headers: {'Authorization' : SoccerKey}
+    const res = await fetch('https://api.football-data.org/v2/competitions?plan=TIER_ONE',{
+        method:'GET', headers: {'X-Auth-Token' : SoccerKey}
     })
     const data = await res.json();
-    const topLeague = 
-    data.filter(item=>item.notMatch==undefined).
-    filter(item=>item.isCyber==false).
-    filter(item=>item.name=='').
-    sort((a,b)=>a.num-b.num);
-    const uniqueLeagueId = [...new Set(topLeague.map(item => item.league_id))];
-    const filteredLeague = uniqueLeagueId.map(item=>topLeague.filter(isi=>isi.league_id==item))
     return {
         props:{
-            league:filteredLeague
+            league:data.competitions.sort((a,b)=>a.id-b.id)
         },
-        revalidate:10
+        revalidate:60
     }
 }
 
@@ -28,48 +22,39 @@ export default function Home({league}) {
   const [laga,setLaga]=useState([])
 
   const getMatch = async () => {
-      const res = await fetch('https://api.betting-api.com/fonbet/football/line/all',{
-          method:'GET', headers: {'Authorization' : SoccerKey}
-      })
+      const res = await fetch('/api/matchs')
       const data = await res.json()
-      const today = new Date()
-      const nextMatch = 
-      data.filter(item => item.date_start.substring(0,10)==today.toISOString().substring(0,10)).
-      filter(item=>item.notMatch==undefined).
-      filter(item=>item.isCyber==false).
-      filter(item=>item.name=='').
-      sort((a,b)=>a.num-b.num);
-      const uniqueLeagueId = [...new Set(nextMatch.map(item => item.league_id))];
-      const filteredLeague = uniqueLeagueId.map(item=>nextMatch.filter(isi=>isi.league_id==item))
+      const sorted = data.matches.sort((a,b)=>a.competition.id-b.competition.id)
+      const uniqueLeagueId = [...new Set(sorted.map(item => item.competition.id))];
+      const filteredLeague = uniqueLeagueId.map(item=>sorted.filter(isi=>isi.competition.id==item))
       setLaga(filteredLeague)
   }
 
   useEffect(()=>{
       getMatch()
-      return () => {setLaga([])}
   },[])
 
   return (
-    <Layout
-    title='Jadwal hari ini'
-    desc=''
-    keyword=''
-    league={league}
-    left='/sk-left.jpg'
-    right='/sk-right.jpg'
-    link='/'
-    mtop='/foot.gif'
-    ttop='/top.jpg'
-    tmid='/mid.jpg'
-    mfoot='/top.jpg'
-    >
-    {!laga.length?
-    <Loading/>
-    :
-    laga.map((item,index)=>(
-      <Match key={index} matchs={item}/>
-    ))
-    }
-    </Layout>
+      <>
+      <Navbar team={league}/>
+      <main className='mt-12'>
+        <div className='flex relative z-20'>
+            <div className='flex-none w-64 hidden lg:block self-start sticky top-12'>
+                <Sidebar team={league}/>
+            </div>
+            <div className='w-full z-40 bg-gray-900 min-h-screen'>
+                {laga.map((item,index)=>(
+                    <League key={index} laga={item}/>
+                ))}
+            </div>
+            <div className='flex-none w-40 hidden md:block self-start sticky top-12'>
+                <Image src='/ads-160x600.png' width={160} height={600} alt='ads'/>
+            </div>
+        </div>
+      </main>
+        <footer className='text-center border-t border-white py-4 bg-gray-900'>
+            <h1 className='text-sm font-semibold italic'>Planet Football<span> @{new Date().getFullYear()}</span></h1>
+        </footer>
+      </>
   )
 }

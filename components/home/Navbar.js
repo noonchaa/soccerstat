@@ -5,115 +5,102 @@ import {MdClose} from 'react-icons/md'
 import { useState } from 'react'
 import {useRouter} from 'next/router'
 
-export default function Navbar(){
+export default function Navbar({team}){
     const [open, setOpen] = useState(false)
     const router = useRouter()
+    const sidePath = [
+        {
+            ref:'/#lastday',
+            date: new Date().setDate(new Date().getDate()-1)
+        },
+        {
+            ref:'/',
+            date: new Date()
+        },
+        {
+            ref:'/#nextday',
+            date: new Date().setDate(new Date().getDate()+1)
+        }
+    ]
+
     return(
         <>
         <div className={open==false?
-        'transition duration-500 origin-left transform scale-x-0 z-50 w-80 fixed top-0 h-screen overflow-y-auto overscroll-none bg-gray-50'
+        'transition duration-100 transform -translate-y-full lg:hidden z-50 w-full md:w-64 fixed top-0 overflow-y-auto overscroll-none bg-gray-900 h-screen'
         :
-        'transition duration-500 origin-left transform scale-100 z-50 w-80 fixed top-0 h-screen overflow-y-auto overscroll-none bg-gray-50'}>
-        <div className='bg-red-600 px-4 py-2 flex justify-between items-center cursor-pointer'>
-            <MdClose className='w-6 h-6 text-white' onClick={()=>setOpen(!open)}/>
-            <Link href='/'>
-                <a className='text-white ml-3 font-bold italic'>Soccer Stat</a>
+        'transition duration-100 transform translate-y-0 lg:hidden z-50 w-full md:w-64 fixed top-0 overflow-y-auto overscroll-none bg-gray-900 h-screen'}>
+        <div className='px-4 py-2 flex justify-between items-center cursor-pointer sticky top-0 bg-gray-900 z-40'>
+            <MdClose className='w-8 h-8 flex-none lg:hidden' onClick={()=>setOpen(!open)}/>
+            <div className='w-full text-center'>
+                <Link href='/'>
+                    <a className='font-bold italic text-2xl'>Planet Football</a>
+                </Link>
+            </div>
+        </div>
+        <div className='md:hidden bg-white flex py-4 animate-pulse'>
+            <a href='/' target='blank' className='font-bold w-full text-center uppercase text-xl text-red-600'>
+                bonus deposit 200%
+            </a>
+        </div>
+        <div className='w-full text-center py-4'>
+            <Image src='/ads-300x250.png' width={300} height={250} alt='advertisement' className='mx-auto'/>
+        </div>
+        <h1 className='text-center text-red-600 text-xl capitalize font-bold border-b border-white py-4 md:hidden'>
+            Jadwal
+        </h1>
+        <div className='flex flex-col md:hidden' onClick={()=>setOpen(!open)}>
+            {sidePath.map((item,index)=>(
+            <Link href={item.ref} key={index}>
+            <a className={router.asPath===item.ref?
+                'px-4 py-2 font-medium italic bg-red-600 text-center':
+                'pl-4 py-2 font-medium'}>
+            {new Date(item.date).toLocaleDateString('id',{weekday:'long',day:'2-digit',month:'long'})}
+            </a>
             </Link>
+            ))}
         </div>
-        <div className='h-28 -mb-3 w-full'>
-            <Image src='/ads-320x100.png' width={320} height={100} alt='advertisement'/>
-        </div>
-        <div className='flex flex-col md:hidden'>
-        <Link href='/live'>
-            <a className={router.asPath==='/live'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600 bg-gray-50':
-                'pl-4 py-2 font-medium text-sm text-blue-900 bg-gray-100 border-b border-gray-300'}>
-            Live
-            </a>
-        </Link>
-        <Link href='/'>
-            <a className={router.asPath==='/'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600 bg-gray-50':
-                'pl-4 py-2 font-medium text-sm text-blue-900 border-b border-gray-300'}>
-            {new Date().getDate()}-{new Date().toLocaleString('id-ID',{month:'short'})}
-            </a>
-        </Link>
-        <Link href='/besok'>
-            <a className={router.asPath==='/besok'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600':
-                'pl-4 py-2 font-medium text-sm text-blue-900 bg-gray-100 border-b border-gray-300'}>
-            {new Date().getDate()+1}-{new Date().toLocaleString('id-ID',{month:'short'})}
-            </a>
-        </Link>
-        </div>
+        <h1 className='text-center text-red-600 text-xl capitalize font-bold border-b border-white pt-8 pb-4'>
+            daftar liga
+        </h1>
         <div className='flex flex-col'>
-        <Link href='/live'>
-            <a className={router.asPath==='/league/'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600':
-                'pl-4 py-2 font-medium text-sm text-blue-900 border-b border-gray-300'}>
-                European Championship. 1/8 finals
-            </a>
-        </Link>
-        <Link href='/'>
-            <a className={router.asPath==='/league/'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600':
-                'pl-4 py-2 font-medium text-sm text-blue-900 bg-gray-100 border-b border-gray-300'}>
-                European Championship. 1/8 finals
-            </a>
-        </Link>
-        <Link href='/besok'>
-            <a className={router.asPath==='/league/'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600':
-                'pl-4 py-2 font-medium text-sm text-blue-900 border-b border-gray-300'}>
-            European Championship. 1/8 finals
-            </a>
-        </Link>
-        <Link href='/besok'>
-            <a className={router.asPath==='/league/'?
-                'pl-3 py-2 font-medium text-red-600 italic text-sm border-r-4 border-red-600':
-                'pl-4 py-2 font-medium text-sm text-blue-900 bg-gray-100 border-b border-gray-300'}>
-            European Championship. 1/8 finals
-            </a>
-        </Link>
-        <div className='h-screen'></div>
+            {team.map((item,index)=>(
+            <Link href={'/league/'+item.id} key={index}>
+                <a className={router.asPath==='/league/'+item.id?
+                    'px-4 py-2 font-medium italic bg-red-600 text-center':
+                    'pl-4 py-2 font-medium'}>
+                    {item.name}
+                </a>
+            </Link>
+            ))}
+        </div>
+        <div className='w-full text-center py-8'>
+            <Image src='/ads-300x600.png' width={300} height={600} alt='advertisment' className='mx-auto'/>
         </div>
         </div>
 
-        <header className='flex justify-between items-center bg-gray-50 fixed top-0 w-full max-w-screen-2xl z-40'>
-            <div className='bg-red-600 px-4 py-2 flex justify-between items-center cursor-pointer'>
-                <FaBars className='w-6 h-6 text-white' onClick={()=>setOpen(!open)}/>
+        <header className='flex justify-between items-center bg-gray-900 fixed top-0 w-full max-w-screen-2xl z-40'>
+            <div className='px-4 py-2 flex items-center cursor-pointer flex-none w-full md:w-64'>
+                <FaBars className='w-8 h-8 flex-none lg:hidden' onClick={()=>setOpen(!open)}/>
+                <div className='w-full text-center'>
                 <Link href='/'>
-                    <a className='text-white ml-3 font-bold italic'>Soccer Stat</a>
+                    <a className='font-bold italic text-2xl'>Planet Football</a>
                 </Link>
+                </div>
             </div>
             <div className='hidden md:grid grid-rows-1 grid-cols-3 text-center gap-4'>
-                <Link href='/live'>
-                    <a className={router.asPath==='/home'?
-                        'px-4 py-2 font-medium text-red-600 text-sm italic border-b-4 border-red-600':
-                        'px-4 py-2 font-medium text-sm text-blue-900'}>
-                        Live
-                    </a>
+                {sidePath.map((item,index)=>(
+                <Link href={item.ref} key={index}>
+                <a className={router.asPath===item.ref?
+                    'px-4 py-2 font-medium text-red-600 text-sm italic border-b-4 border-red-600':
+                    'px-4 py-2 font-medium text-sm'}>
+                {new Date(item.date).toLocaleDateString('id',{day:'2-digit',month:'long'})}
+                </a>
                 </Link>
-                <Link href='/'>
-                    <a className={router.asPath==='/'?
-                        'px-4 py-2 font-medium text-red-600 text-sm italic border-b-4 border-red-600':
-                        'px-4 py-2 font-medium text-sm text-blue-900'}>
-                    {new Date().getDate()}-{new Date().toLocaleString('id-ID',{month:'short'})}
-                    </a>
-                </Link>
-                <Link href='/besok'>
-                    <a className={router.asPath==='/besok'?
-                        'px-4 py-2 font-medium text-red-600 text-sm italic border-b-4 border-red-600':
-                        'px-4 py-2 font-medium text-sm text-blue-900'}>
-                    {new Date().getDate()+1}-{new Date().toLocaleString('id-ID',{month:'short'})}
-                    </a>
-                </Link>
+                ))}
             </div>
-            <div className='text-right mr-4'>
-                <a href='/' target='blank'>
-                    <div className='rounded-lg bg-red-600 px-2 py-1'>
-                        <h1 className='text-white font-semibold uppercase text-sm'>Daftar</h1>
-                    </div>
+            <div className='hidden md:block md:flex-none w-40 md:text-center'>
+                <a href='/' target='blank' className='rounded-lg bg-red-600 font-semibold uppercase text-sm px-2 py-1'>
+                    deposit + 200%
                 </a>
             </div>
         </header>
