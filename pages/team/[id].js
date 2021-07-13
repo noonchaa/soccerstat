@@ -1,5 +1,4 @@
 import {SoccerKey} from '../../lib/socerApi'
-import {useRouter} from 'next/router'
 import Layout from '../../components/home/Layout'
 
 export const getStaticPaths = async () => {
@@ -39,9 +38,8 @@ export async function getStaticProps({ params }) {
 }
 
 const Team = ({team}) => {
-    const router = useRouter()
 
-    if(router.isFallback||team==null){
+    if(team==null){
         return(
             <Layout>
             <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto mt-32'>
