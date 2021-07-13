@@ -49,10 +49,7 @@ export default function Navbar({team}){
         <div className='w-full text-center py-4'>
             <Image src='/ads-300x250.png' width={300} height={250} alt='advertisement' className='mx-auto'/>
         </div>
-        <h1 className='text-center text-red-600 text-xl capitalize font-bold border-b border-white py-4 md:hidden'>
-            Jadwal
-        </h1>
-        <div className='flex flex-col md:hidden' onClick={()=>setOpen(!open)}>
+        <div className={router.asPath=='/'||router.asPath=='/#kemarin'||router.asPath=='/#sekarang'||router.asPath=='/#besok'||router.asPath==''?'flex flex-col md:hidden border-b border-t border-white':'hidden'} onClick={()=>setOpen(!open)}>
             {sidePath.map((item,index)=>(
             <Link href={item.ref} key={index}>
             <a className={router.asPath===item.ref?
@@ -63,10 +60,7 @@ export default function Navbar({team}){
             </Link>
             ))}
         </div>
-        <h1 className='text-center text-red-600 text-xl capitalize font-bold border-b border-white pt-8 pb-4'>
-            daftar liga
-        </h1>
-        <div className='flex flex-col'>
+        <div className='flex flex-col border-b border-t border-white'>
             {team.map((item,index)=>(
             <Link href={'/league/'+item.id} key={index}>
                 <a className={router.asPath==='/league/'+item.id?
@@ -82,7 +76,7 @@ export default function Navbar({team}){
         </div>
         </div>
 
-        <header className='flex justify-between items-center bg-gray-900 fixed top-0 w-full max-w-screen-2xl z-40'>
+        <header className='flex justify-between items-center bg-gray-900 fixed top-0 w-full max-w-screen-2xl z-40 border-b border-white'>
             <div className='px-4 py-2 flex items-center cursor-pointer flex-none w-full md:w-64'>
                 <FaBars className='w-8 h-8 flex-none lg:hidden' onClick={()=>setOpen(!open)}/>
                 <div className='w-full text-center'>
@@ -91,7 +85,7 @@ export default function Navbar({team}){
                 </Link>
                 </div>
             </div>
-            <div className='hidden md:grid grid-rows-1 grid-cols-4 text-center gap-4'>
+            <div className={router.asPath=='/'||router.asPath=='/#kemarin'||router.asPath=='/#sekarang'||router.asPath=='/#besok'||router.asPath==''?'hidden md:grid grid-rows-1 grid-cols-4 text-center gap-4':'hidden'}>
                 {sidePath.map((item,index)=>(
                 <Link href={item.ref} key={index}>
                 <a className={router.asPath===item.ref?

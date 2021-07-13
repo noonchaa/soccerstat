@@ -15,10 +15,7 @@ const Sidebar = ({team}) => {
             <div className='w-64 text-center py-4'>
                 <Image src='/ads-200x200.png' width={200} height={200} alt='advertisement' className='mx-auto'/>
             </div>
-            <h1 className='text-center text-red-600 text-xl capitalize font-bold border-b border-white py-4'>
-                daftar liga
-            </h1>
-            <div className='flex flex-col w-64'>
+            <div className='flex flex-col w-64 border-b border-t border-white'>
                 {team.map((item,index)=>(
                 <Link href={'/league/'+item.id} key={index}>
                     <a className={router.asPath==='/league/'+item.id?

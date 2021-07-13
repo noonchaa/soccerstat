@@ -1,60 +1,51 @@
-import { useEffect, useState } from 'react'
-import { SoccerKey } from '../lib/socerApi'
-import Navbar from '../components/home/Navbar';
 import League from '../components/home/League';
-import Image from 'next/image'
-import Sidebar from '../components/home/Sidebar';
+import {SoccerKey} from '../lib/socerApi'
+import Layout from '../components/home/Layout';
 
 export const getStaticProps = async () => {
-    const res = await fetch('https://api.football-data.org/v2/competitions?plan=TIER_ONE',{
+    const nextWeek = new Date().setDate(new Date().getDate()+10)
+    const res = await fetch(`https://api.football-data.org/v2/matches?dateFrom=${new Date().toISOString().substring(0,10)}&&dateTo=${new Date(nextWeek).toISOString().substring(0,10)}`,{
         method:'GET', headers: {'X-Auth-Token' : SoccerKey}
     })
-    const data = await res.json();
-    return {
-        props:{
-            league:data.competitions.sort((a,b)=>a.id-b.id)
-        },
-        revalidate:60
+    if (res.status===429){
+        return {
+            props:{
+                league:[]
+            },
+            revalidate:10
+        }
+    } else {
+        const data = await res.json()
+        const sorted = data.matches.sort((a,b)=>a.competition.id-b.competition.id)
+        const uniqueLeagueId = [...new Set(sorted.map(item => item.competition.id))];
+        const filteredLeague = uniqueLeagueId.map(item=>sorted.filter(isi=>isi.competition.id==item))
+        return {
+            props:{
+                league:filteredLeague
+            },
+            revalidate:10
+        }
     }
 }
 
 export default function Home({league}) {
-  const [laga,setLaga]=useState([])
 
-  const getMatch = async () => {
-      const res = await fetch('/api/matchs')
-      const data = await res.json()
-      const sorted = data.matches.sort((a,b)=>a.competition.id-b.competition.id)
-      const uniqueLeagueId = [...new Set(sorted.map(item => item.competition.id))];
-      const filteredLeague = uniqueLeagueId.map(item=>sorted.filter(isi=>isi.competition.id==item))
-      setLaga(filteredLeague)
+  if(!league.length){
+      return(
+          <Layout>
+          <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto mt-32'>
+              <img src='/goal.svg' alt='logo' width='100%' height='auto'/>
+              <h1 className='text-center text-2xl py-4 animate-pulse text-red-500 font-bold'>Maintenance Server</h1>
+              <h1 className='text-center text-xl font-semibold'>Silahkan Pilih Halaman Lain</h1>
+          </div>
+          </Layout>
+      )
   }
-
-  useEffect(()=>{
-      getMatch()
-  },[])
-
   return (
-      <>
-      <Navbar team={league}/>
-      <main className='mt-12'>
-        <div className='flex relative z-20'>
-            <div className='flex-none w-64 hidden lg:block self-start sticky top-12'>
-                <Sidebar team={league}/>
-            </div>
-            <div className='w-full z-40 bg-gray-900 min-h-screen'>
-                {laga.map((item,index)=>(
-                    <League key={index} laga={item}/>
-                ))}
-            </div>
-            <div className='flex-none w-40 hidden md:block self-start sticky top-12'>
-                <Image src='/ads-160x600.png' width={160} height={600} alt='ads'/>
-            </div>
-        </div>
-      </main>
-        <footer className='text-center border-t border-white py-4 bg-gray-900'>
-            <h1 className='text-sm font-semibold italic'>Planet Football<span> @{new Date().getFullYear()}</span></h1>
-        </footer>
-      </>
+      <Layout>
+        {league.map((item,index)=>(
+            <League key={index} laga={item}/>
+        ))}
+      </Layout>
   )
 }

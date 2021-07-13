@@ -27,7 +27,7 @@ const League = ({laga}) => {
                 </h1>
             </div>
             {laga.map((item,index)=>(
-                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id} live={item.status}/>
             ))}
         </div>
 
@@ -38,7 +38,7 @@ const League = ({laga}) => {
                 </h1>
             </div>
             {lastDay.map((item,index)=>(
-                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id} live={item.status}/>
             ))}
         </div>
 
@@ -49,7 +49,7 @@ const League = ({laga}) => {
                 </h1>
             </div>
             {today.map((item,index)=>(
-                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id} live={item.status}/>
             ))}
         </div>
         
@@ -60,7 +60,7 @@ const League = ({laga}) => {
                 </h1>
             </div>
             {nextDay.map((item,index)=>(
-                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id} live={item.status}/>
             ))}
         </div>
         </>
