@@ -1,5 +1,6 @@
 import {SoccerKey} from '../../lib/socerApi'
 import Layout from '../../components/home/Layout'
+import {useRouter} from 'next/router'
 
 export const getStaticPaths = async () => {
     const nextWeek = new Date().setDate(new Date().getDate()+10)
@@ -19,27 +20,19 @@ export async function getStaticProps({ params }) {
     const res = await fetch(`https://api.football-data.org/v2/teams/${Number(params.id)}`,{
         method:'GET', headers: {'X-Auth-Token' : SoccerKey}
     })
-    if(res.status===429){
-        return {
-            props: {
-                team: null
-            },
-            revalidate:10
-        }
-    } else {
-        const data = await res.json()
-        return {
-            props: {
-                team: data
-            },
-            revalidate:10
-        }
+    const data = await res.json()
+    return {
+        props: {
+            team: data
+        },
+        revalidate:10
     }
 }
 
 const Team = ({team}) => {
+    const router = useRouter()
 
-    if(team==null){
+    if(router.isFallback){
         return(
             <Layout>
             <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto mt-32'>
