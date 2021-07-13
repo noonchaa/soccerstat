@@ -21,17 +21,17 @@ const League = ({laga}) => {
     return(
         <>
         <div className={router.asPath==='/'?'block':'hidden'}>
-            <div className={!today.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
+            <div className={!laga.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
                 <h1 className='capitalize text-xl font-bold'>
-                    {!today.length?'':today[0].competition.name}
+                    {!laga.length?'':laga[0].competition.name}
                 </h1>
             </div>
-            {today.map((item,index)=>(
+            {laga.map((item,index)=>(
                 <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
             ))}
         </div>
 
-        <div className={router.asPath==='/#lastday'?'block':'hidden'}>
+        <div className={router.asPath==='/#kemarin'?'block':'hidden'}>
             <div className={!lastDay.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
                 <h1 className='capitalize text-xl font-bold'>
                     {!lastDay.length?'':lastDay[0].competition.name}
@@ -41,8 +41,19 @@ const League = ({laga}) => {
                 <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
             ))}
         </div>
+
+        <div className={router.asPath==='/#sekarang'?'block':'hidden'}>
+            <div className={!today.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
+                <h1 className='capitalize text-xl font-bold'>
+                    {!today.length?'':today[0].competition.name}
+                </h1>
+            </div>
+            {today.map((item,index)=>(
+                <Match key={index} home={item.homeTeam.name} away={item.awayTeam.name} score1={item.score.fullTime.homeTeam} score2={item.score.fullTime.awayTeam} matchId={item.id} dateStart={item.utcDate} homeId={item.homeTeam.id} awayId={item.awayTeam.id}/>
+            ))}
+        </div>
         
-        <div className={router.asPath==='/#nextday'?'block':'hidden'}>
+        <div className={router.asPath==='/#besok'?'block':'hidden'}>
             <div className={!nextDay.length?'hidden':'text-center bg-red-600 py-2 sticky top-12'}>
                 <h1 className='capitalize text-xl font-bold'>
                     {!nextDay.length?'':nextDay[0].competition.name}

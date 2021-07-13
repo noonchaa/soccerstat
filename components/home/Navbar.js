@@ -10,15 +10,19 @@ export default function Navbar({team}){
     const router = useRouter()
     const sidePath = [
         {
-            ref:'/#lastday',
+            ref:'/',
+            date: 'All Matchs'
+        },
+        {
+            ref:'/#kemarin',
             date: new Date().setDate(new Date().getDate()-1)
         },
         {
-            ref:'/',
+            ref:'/#sekarang',
             date: new Date()
         },
         {
-            ref:'/#nextday',
+            ref:'/#besok',
             date: new Date().setDate(new Date().getDate()+1)
         }
     ]
@@ -54,7 +58,7 @@ export default function Navbar({team}){
             <a className={router.asPath===item.ref?
                 'px-4 py-2 font-medium italic bg-red-600 text-center':
                 'pl-4 py-2 font-medium'}>
-            {new Date(item.date).toLocaleDateString('id',{weekday:'long',day:'2-digit',month:'long'})}
+            {item.date==='All Matchs'?item.date:new Date(item.date).toLocaleDateString('id',{weekday:'long',day:'2-digit',month:'long'})}
             </a>
             </Link>
             ))}
@@ -87,13 +91,13 @@ export default function Navbar({team}){
                 </Link>
                 </div>
             </div>
-            <div className='hidden md:grid grid-rows-1 grid-cols-3 text-center gap-4'>
+            <div className='hidden md:grid grid-rows-1 grid-cols-4 text-center gap-4'>
                 {sidePath.map((item,index)=>(
                 <Link href={item.ref} key={index}>
                 <a className={router.asPath===item.ref?
                     'px-4 py-2 font-medium text-red-600 text-sm italic border-b-4 border-red-600':
                     'px-4 py-2 font-medium text-sm'}>
-                {new Date(item.date).toLocaleDateString('id',{day:'2-digit',month:'long'})}
+                {item.date==='All Matchs'?item.date:new Date(item.date).toLocaleDateString('id',{weekday:'long',day:'2-digit',month:'long'})}
                 </a>
                 </Link>
                 ))}

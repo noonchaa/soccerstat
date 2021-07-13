@@ -1,6 +1,6 @@
 import {SoccerKey} from '../../lib/socerApi'
 
-const nextWeek = new Date().setDate(new Date().getDate()+1)
+const nextWeek = new Date().setDate(new Date().getDate()+9)
 const lastWeek = new Date().setDate(new Date().getDate()-1)
 
 export default async function handler(req,res) {
