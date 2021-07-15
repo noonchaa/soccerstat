@@ -7,7 +7,7 @@ class MyDocument extends Document {
       <Html lang='id' className='max-w-screen-2xl mx-auto' >
         <Head>
         </Head>
-        <body className='m-0 antialiased min-h-screen bg-gray-900 text-white'>
+        <body className='m-0 antialiased bg-gray-900 text-white'>
           <Main />
           <NextScript />
         </body>

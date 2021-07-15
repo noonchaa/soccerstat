@@ -8,24 +8,6 @@ import {useRouter} from 'next/router'
 export default function Navbar({team}){
     const [open, setOpen] = useState(false)
     const router = useRouter()
-    const sidePath = [
-        {
-            ref:'/',
-            date: 'All Matchs'
-        },
-        {
-            ref:'/#kemarin',
-            date: new Date().setDate(new Date().getDate()-1)
-        },
-        {
-            ref:'/#sekarang',
-            date: new Date()
-        },
-        {
-            ref:'/#besok',
-            date: new Date().setDate(new Date().getDate()+1)
-        }
-    ]
 
     return(
         <>
@@ -42,23 +24,14 @@ export default function Navbar({team}){
             </div>
         </div>
         <div className='md:hidden bg-white flex py-4 animate-pulse'>
-            <a href='/' target='blank' className='font-bold w-full text-center uppercase text-xl text-red-600'>
+            <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='blank' className='font-bold w-full text-center uppercase text-xl text-red-600'>
                 bonus deposit 200%
             </a>
         </div>
         <div className='w-full text-center py-4'>
-            <Image src='/ads-300x250.png' width={300} height={250} alt='advertisement' className='mx-auto'/>
-        </div>
-        <div className={router.asPath=='/'||router.asPath=='/#kemarin'||router.asPath=='/#sekarang'||router.asPath=='/#besok'||router.asPath==''?'flex flex-col md:hidden border-b border-t border-white':'hidden'} onClick={()=>setOpen(!open)}>
-            {sidePath.map((item,index)=>(
-            <Link href={item.ref} key={index}>
-            <a className={router.asPath===item.ref?
-                'px-4 py-2 font-medium italic bg-red-600 text-center':
-                'pl-4 py-2 font-medium'}>
-            {item.date==='All Matchs'?item.date:new Date(item.date).toLocaleDateString('id',{weekday:'long',day:'2-digit',month:'long'})}
+            <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375'>
+            <Image src='/300x250.png' width={300} height={250} alt='advertisement' className='mx-auto'/>
             </a>
-            </Link>
-            ))}
         </div>
         <div className='flex flex-col border-b border-t border-white'>
             {team.map((item,index)=>(
@@ -72,7 +45,9 @@ export default function Navbar({team}){
             ))}
         </div>
         <div className='w-full text-center py-8'>
-            <Image src='/ads-300x600.png' width={300} height={600} alt='advertisment' className='mx-auto'/>
+            <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375'>
+            <Image src='/250x350.jpg' width={250} height={350} alt='advertisment' className='mx-auto'/>
+            </a>
         </div>
         </div>
 
@@ -85,19 +60,8 @@ export default function Navbar({team}){
                 </Link>
                 </div>
             </div>
-            <div className={router.asPath=='/'||router.asPath=='/#kemarin'||router.asPath=='/#sekarang'||router.asPath=='/#besok'||router.asPath==''?'hidden md:grid grid-rows-1 grid-cols-4 text-center gap-4':'hidden'}>
-                {sidePath.map((item,index)=>(
-                <Link href={item.ref} key={index}>
-                <a className={router.asPath===item.ref?
-                    'px-4 py-2 font-medium text-red-600 text-sm italic border-b-4 border-red-600':
-                    'px-4 py-2 font-medium text-sm'}>
-                {item.date==='All Matchs'?item.date:new Date(item.date).toLocaleDateString('id',{weekday:'long',day:'2-digit',month:'long'})}
-                </a>
-                </Link>
-                ))}
-            </div>
             <div className='hidden md:block md:flex-none w-40 md:text-center'>
-                <a href='/' target='blank' className='rounded-lg bg-red-600 font-semibold uppercase text-sm px-2 py-1'>
+                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='blank' className='rounded-lg bg-red-600 font-semibold uppercase text-sm px-2 py-1'>
                     deposit + 200%
                 </a>
             </div>

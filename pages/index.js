@@ -1,51 +1,39 @@
-import League from '../components/home/League';
-import {SoccerKey} from '../lib/socerApi'
-import Layout from '../components/home/Layout';
+import Jadwal from "../components/home/Jadwal"
+import Layout from "../components/home/Layout"
 
 export const getStaticProps = async () => {
-    const nextWeek = new Date().setDate(new Date().getDate()+10)
-    const res = await fetch(`https://api.football-data.org/v2/matches?dateFrom=${new Date().toISOString().substring(0,10)}&&dateTo=${new Date(nextWeek).toISOString().substring(0,10)}`,{
-        method:'GET', headers: {'X-Auth-Token' : SoccerKey}
-    })
-    if (res.status===429){
-        return {
-            props:{
-                league:[]
-            },
-            revalidate:10
-        }
-    } else {
-        const data = await res.json()
-        const sorted = data.matches.sort((a,b)=>a.competition.id-b.competition.id)
-        const uniqueLeagueId = [...new Set(sorted.map(item => item.competition.id))];
-        const filteredLeague = uniqueLeagueId.map(item=>sorted.filter(isi=>isi.competition.id==item))
-        return {
-            props:{
-                league:filteredLeague
-            },
-            revalidate:10
-        }
+    const res = await fetch('https://feedodds.com/feed/json?language=eng&timeZone=Asia/Jakarta&brandId=4&key=445f6b52b11d40b959a78b38a3651694&filterData[type][]=0&filterData[type][]=2&filterData[sport][]=1')
+    const data = await res.json()
+    const champions = data.sport[1].region[20001].competition[566]
+    const laliga = data.sport[1].region[2150001].competition[545]
+    const premiere = data.sport[1].region[2570001].competition[538]
+    const bundesliga = data.sport[1].region[900001].competition[541]
+    const ligue1 = data.sport[1].region[830001].competition[548]
+    const serieAbrazil = data.sport[1].region[390001].competition[1792]
+    const ligaProfesional = data.sport[1].region[180001].competition[1685]
+    const eredivisie = data.sport[1].region[1640001].competition[1957]
+    const mls = data.sport[1].region[2420001].competition[3025]
+    const premiereRus = data.sport[1].region[1900001].competition[1993]
+    const championship = data.sport[1].region[2570001].competition[539]
+    const libertadores = data.sport[1].region[60001].competition[2988]
+    const team = [champions,laliga,premiere,championship,bundesliga,ligue1,serieAbrazil,ligaProfesional,eredivisie,premiereRus,libertadores,mls]
+
+    return {
+        props: {
+            matchs : team
+        },
+        revalidate : 1
     }
 }
 
-export default function Home({league}) {
+const Vbet = ({matchs}) => {
 
-  if(!league.length){
-      return(
-          <Layout>
-          <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto mt-32'>
-              <img src='/goal.svg' alt='logo' width='100%' height='auto'/>
-              <h1 className='text-center text-2xl py-4 animate-pulse text-red-500 font-bold'>Maintenance Server</h1>
-              <h1 className='text-center text-xl font-semibold'>Silahkan Pilih Halaman Lain</h1>
-          </div>
-          </Layout>
-      )
-  }
-  return (
-      <Layout>
-        {league.map((item,index)=>(
-            <League key={index} laga={item}/>
-        ))}
-      </Layout>
-  )
+    return(
+        <Layout desc={matchs.map(item=>item.name).join(' ')} keyw={matchs.map(item=>item.name).join(', ')} >
+            {matchs.map((item,index)=>(
+                <Jadwal nama={item.name} game={item.game} key={index}/>
+            ))}
+        </Layout>
+    )
 }
+export default Vbet
