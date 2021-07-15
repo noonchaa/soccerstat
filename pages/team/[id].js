@@ -58,7 +58,7 @@ const Team = ({team}) => {
         )
     }
     const sortedTeam = team.filter((item=>item.strSport=='Soccer'))[0]
-    const {strTeamBadge,strTeam,strTeamShort,strCountry,intFormedYear,strLeague,strLeague2,strLeague3,strWebsite,strYoutube,strFacebook,strInstagram,strTwitter,strTeamJersey,strDescriptionEN,strStadiumThumb,strStadium,strStadiumLocation,intStadiumCapacity,strStadiumDescription} = sortedTeam
+    const {strTeam,strTeamShort,strCountry,intFormedYear,strLeague,strLeague2,strLeague3,strWebsite,strYoutube,strFacebook,strInstagram,strTwitter,strTeamJersey,strDescriptionEN,strStadiumThumb,strStadium,strStadiumLocation,intStadiumCapacity,strStadiumDescription} = sortedTeam
 
     return(
         <Layout title={strTeam} desc={strDescriptionEN.slice(0,500)} keyw={strTeam+', '+strLeague+', '+strLeague2+', '+strLeague3+', '+strCountry+', '+strStadium}>
@@ -73,14 +73,14 @@ const Team = ({team}) => {
                     <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+strTwitter} target='_blank'>@{strTeam}</a></h1>
                 </div>
                 <div className='w-full md:w-1/3 pb-4'>
-                    {strTeamBadge==null||strTeamBadge==''||strTeamBadge==undefined?
+                    {sortedTeam.strTeamBadge==null||sortedTeam.strTeamBadge==''||sortedTeam.strTeamBadge==undefined?
                     <div>
                         <img src='/logo.svg' alt='logo' width='100%' height='auto'/>
                         <h1 className='text-center'>Sorry Badge Not Found</h1>
                     </div>
                     :
                     <div>
-                        <img src={strTeamBadge} alt='logo' width='100%' height='auto'/>
+                        <img src={sortedTeam.strTeamBadge} alt='logo' width='100%' height='auto'/>
                     </div>
                     }
                 </div>
