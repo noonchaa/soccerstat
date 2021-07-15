@@ -67,10 +67,10 @@ const Team = ({team}) => {
                     <h1 className='text-2xl font-bold py-2'>{strTeam}<span className='uppercase'> {strTeamShort==null?'':' - '+strTeamShort}</span></h1>
                     <h1 className='text-xl font-bold py-2'>{strCountry} {intFormedYear}</h1>
                     <h1 className='text-xl font-bold py-2 lowercase'><FaGlobeEurope className='text-blue-700 inline mr-4'/><a href={'https://'+strWebsite} target='_blank'>{strWebsite}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaYoutube className='text-red-600 inline mr-4'/><a href={'https://'+strYoutube} target='_blank'>@{strTeam.replace(/ /g,'_')}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaFacebook className='text-blue-700 inline mr-4'/><a href={'https://'+strFacebook} target='_blank'>@{strTeam.replace(/ /g,'_')}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaInstagramSquare className='text-pink-300 inline mr-4'/><a href={'https://'+strInstagram} target='_blank'>@{strTeam.replace(/ /g,'_')}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+strTwitter} target='_blank'>@{strTeam.replace(/ /g,'_')}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaYoutube className='text-red-600 inline mr-4'/><a href={'https://'+strYoutube} target='_blank'>@{strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaFacebook className='text-blue-700 inline mr-4'/><a href={'https://'+strFacebook} target='_blank'>@{strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaInstagramSquare className='text-pink-300 inline mr-4'/><a href={'https://'+strInstagram} target='_blank'>@{strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+strTwitter} target='_blank'>@{strTeam}</a></h1>
                 </div>
                 <div className='w-full md:w-1/3 pb-4'>
                     {strTeamBadge==null||strTeamBadge==''||strTeamBadge==undefined?
@@ -98,7 +98,7 @@ const Team = ({team}) => {
                 </div>
             </div>
 
-            <div dangerouslySetInnerHTML={{__html:strDescriptionEN.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4'></div>
+            <div dangerouslySetInnerHTML={{__html: strDescriptionEN==null?'':strDescriptionEN.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4'></div>
             
             <div className='flex flex-col md:flex-row p-4 md:items-center'>
                 <div className='w-full md:w-1/2'>
@@ -120,7 +120,7 @@ const Team = ({team}) => {
                 </div>
             </div>
 
-            <div dangerouslySetInnerHTML={{__html:strStadiumDescription.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4 pb-4'></div>
+            <div dangerouslySetInnerHTML={{__html:strStadiumDescription==null?'':strStadiumDescription.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4 pb-4'></div>
         </Layout>
     )
 }
