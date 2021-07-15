@@ -58,19 +58,18 @@ const Team = ({team}) => {
         )
     }
     const sortedTeam = team.filter((item=>item.strSport=='Soccer'))[0]
-    const {strTeamShort,strCountry,intFormedYear,strLeague,strLeague2,strLeague3,strWebsite,strYoutube,strFacebook,strInstagram,strTwitter,strTeamJersey,strDescriptionEN,strStadiumThumb,strStadium,strStadiumLocation,intStadiumCapacity,strStadiumDescription} = sortedTeam
 
     return(
-        <Layout title={sortedTeam.strTeam} desc={strDescriptionEN==undefined?'':strDescriptionEN.slice(0,500)} keyw={sortedTeam.strTeam+', '+strLeague+', '+strLeague2+', '+strLeague3+', '+strCountry+', '+strStadium}>
+        <Layout title={sortedTeam.strTeam} desc={sortedTeam.strDescriptionEN==undefined?'':sortedTeam.strDescriptionEN.slice(0,500)} keyw={sortedTeam.strTeam+', '+sortedTeam.strLeague+', '+sortedTeam.strLeague2+', '+sortedTeam.strLeague3+', '+sortedTeam.strCountry+', '+sortedTeam.strStadium}>
             <div className='flex flex-col md:flex-row p-4 md:items-center'>
                 <div className='md:w-1/3 self-start'>
-                    <h1 className='text-2xl font-bold py-2'>{sortedTeam.strTeam}<span className='uppercase'> {strTeamShort==null?'':' - '+strTeamShort}</span></h1>
-                    <h1 className='text-xl font-bold py-2'>{strCountry} {intFormedYear}</h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaGlobeEurope className='text-blue-700 inline mr-4'/><a href={'https://'+strWebsite} target='_blank'>{strWebsite}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaYoutube className='text-red-600 inline mr-4'/><a href={'https://'+strYoutube} target='_blank'>@{sortedTeam.strTeam}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaFacebook className='text-blue-700 inline mr-4'/><a href={'https://'+strFacebook} target='_blank'>@{sortedTeam.strTeam}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaInstagramSquare className='text-pink-300 inline mr-4'/><a href={'https://'+strInstagram} target='_blank'>@{sortedTeam.strTeam}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+strTwitter} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-2xl font-bold py-2'>{sortedTeam.strTeam}<span className='uppercase'> {sortedTeam.strTeamShort==null?'':' - '+sortedTeam.strTeamShort}</span></h1>
+                    <h1 className='text-xl font-bold py-2'>{sortedTeam.strCountry} {sortedTeam.intFormedYear}</h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaGlobeEurope className='text-blue-700 inline mr-4'/><a href={'https://'+sortedTeam.strWebsite} target='_blank'>{sortedTeam.strWebsite}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaYoutube className='text-red-600 inline mr-4'/><a href={'https://'+sortedTeam.strYoutube} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaFacebook className='text-blue-700 inline mr-4'/><a href={'https://'+sortedTeam.strFacebook} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaInstagramSquare className='text-pink-300 inline mr-4'/><a href={'https://'+sortedTeam.strInstagram} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+sortedTeam.strTwitter} target='_blank'>@{sortedTeam.strTeam}</a></h1>
                 </div>
                 <div className='w-full md:w-1/3 pb-4'>
                     {sortedTeam.strTeamBadge==null||sortedTeam.strTeamBadge==''||sortedTeam.strTeamBadge==undefined?
@@ -85,42 +84,42 @@ const Team = ({team}) => {
                     }
                 </div>
                 <div className='w-full md:w-1/3 pb-4'>
-                    {strTeamJersey==null||strTeamJersey==''||strTeamJersey==undefined?
+                    {sortedTeam.strTeamJersey==null||sortedTeam.strTeamJersey==''||sortedTeam.strTeamJersey==undefined?
                     <div>
                         <img src='/logo.svg' alt='logo' width='100%' height='auto'/>
                         <h1 className='text-center'>Sorry Jersey Not Found</h1>
                     </div>
                     :
                     <div>
-                        <img src={strTeamJersey} alt='logo' width='100%' height='auto'/>
+                        <img src={sortedTeam.strTeamJersey} alt='logo' width='100%' height='auto'/>
                     </div>
                     }
                 </div>
             </div>
 
-            <div dangerouslySetInnerHTML={{__html: strDescriptionEN==null?'':strDescriptionEN.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4'></div>
+            <div dangerouslySetInnerHTML={{__html: sortedTeam.strDescriptionEN==null?'':sortedTeam.strDescriptionEN.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4'></div>
             
             <div className='flex flex-col md:flex-row p-4 md:items-center'>
                 <div className='w-full md:w-1/2'>
-                    {strStadiumThumb==null||strStadiumThumb==''||strStadiumThumb==undefined?
+                    {sortedTeam.strStadiumThumb==null||sortedTeam.strStadiumThumb==''||sortedTeam.strStadiumThumb==undefined?
                     <div>
                         <img src='/logo.svg' alt='logo' width='100%' height='auto'/>
                         <h1 className='text-center'>Sorry Stadium Not Found</h1>
                     </div>
                     :
                     <div>
-                        <img src={strStadiumThumb} alt='logo' width='100%' height='auto'/>
+                        <img src={sortedTeam.strStadiumThumb} alt='logo' width='100%' height='auto'/>
                     </div>
                     }
                 </div>
                 <div className='w-full md:w-1/2 md:pl-4'>
-                    <h1 className='text-2xl font-bold py-2'>{strStadium}</h1>
-                    <h1 className='text-xl font-bold py-2'>Location : {strStadiumLocation}</h1>
-                    <h1 className='text-xl font-bold py-2'>Capacity : {intStadiumCapacity}</h1>
+                    <h1 className='text-2xl font-bold py-2'>{sortedTeam.strStadium}</h1>
+                    <h1 className='text-xl font-bold py-2'>Location : {sortedTeam.strStadiumLocation}</h1>
+                    <h1 className='text-xl font-bold py-2'>Capacity : {sortedTeam.intStadiumCapacity}</h1>
                 </div>
             </div>
 
-            <div dangerouslySetInnerHTML={{__html:strStadiumDescription==null?'':strStadiumDescription.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4 pb-4'></div>
+            <div dangerouslySetInnerHTML={{__html:sortedTeam.strStadiumDescription==null?'':sortedTeam.strStadiumDescription.replace(/\r\n\r\n/g,'<br/><br/>').replace(/\"/g,' - ')}} className='px-4 pb-4'></div>
         </Layout>
     )
 }
