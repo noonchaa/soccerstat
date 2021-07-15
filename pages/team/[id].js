@@ -46,7 +46,7 @@ export async function getStaticProps({ params }) {
 
 const Team = ({team}) => {
 
-    if(team==null){
+    if(team==null||team.filter((item=>item.strSport=='Soccer'))[0]){
         return(
             <Layout>
             <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto my-16'>
