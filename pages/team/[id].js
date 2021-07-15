@@ -58,19 +58,19 @@ const Team = ({team}) => {
         )
     }
     const sortedTeam = team.filter((item=>item.strSport=='Soccer'))[0]
-    const {strTeam,strTeamShort,strCountry,intFormedYear,strLeague,strLeague2,strLeague3,strWebsite,strYoutube,strFacebook,strInstagram,strTwitter,strTeamJersey,strDescriptionEN,strStadiumThumb,strStadium,strStadiumLocation,intStadiumCapacity,strStadiumDescription} = sortedTeam
+    const {strTeamShort,strCountry,intFormedYear,strLeague,strLeague2,strLeague3,strWebsite,strYoutube,strFacebook,strInstagram,strTwitter,strTeamJersey,strDescriptionEN,strStadiumThumb,strStadium,strStadiumLocation,intStadiumCapacity,strStadiumDescription} = sortedTeam
 
     return(
-        <Layout title={strTeam} desc={strDescriptionEN.slice(0,500)} keyw={strTeam+', '+strLeague+', '+strLeague2+', '+strLeague3+', '+strCountry+', '+strStadium}>
+        <Layout title={sortedTeam.strTeam} desc={strDescriptionEN==undefined?'':strDescriptionEN.slice(0,500)} keyw={strTeam+', '+strLeague+', '+strLeague2+', '+strLeague3+', '+strCountry+', '+strStadium}>
             <div className='flex flex-col md:flex-row p-4 md:items-center'>
                 <div className='md:w-1/3 self-start'>
                     <h1 className='text-2xl font-bold py-2'>{strTeam}<span className='uppercase'> {strTeamShort==null?'':' - '+strTeamShort}</span></h1>
                     <h1 className='text-xl font-bold py-2'>{strCountry} {intFormedYear}</h1>
                     <h1 className='text-xl font-bold py-2 lowercase'><FaGlobeEurope className='text-blue-700 inline mr-4'/><a href={'https://'+strWebsite} target='_blank'>{strWebsite}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaYoutube className='text-red-600 inline mr-4'/><a href={'https://'+strYoutube} target='_blank'>@{strTeam}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaFacebook className='text-blue-700 inline mr-4'/><a href={'https://'+strFacebook} target='_blank'>@{strTeam}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaInstagramSquare className='text-pink-300 inline mr-4'/><a href={'https://'+strInstagram} target='_blank'>@{strTeam}</a></h1>
-                    <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+strTwitter} target='_blank'>@{strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaYoutube className='text-red-600 inline mr-4'/><a href={'https://'+strYoutube} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaFacebook className='text-blue-700 inline mr-4'/><a href={'https://'+strFacebook} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaInstagramSquare className='text-pink-300 inline mr-4'/><a href={'https://'+strInstagram} target='_blank'>@{sortedTeam.strTeam}</a></h1>
+                    <h1 className='text-xl font-bold py-2 lowercase'><FaTwitter className='text-blue-500 inline mr-4'/><a href={'https://'+strTwitter} target='_blank'>@{sortedTeam.strTeam}</a></h1>
                 </div>
                 <div className='w-full md:w-1/3 pb-4'>
                     {sortedTeam.strTeamBadge==null||sortedTeam.strTeamBadge==''||sortedTeam.strTeamBadge==undefined?
