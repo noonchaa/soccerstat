@@ -22,7 +22,7 @@ const Jadwal = ({nama,game}) => {
                 </div>
                 <div className='flex px-4 font-semibold items-center py-2'>
                     <div className='w-1/3'>
-                        <Link href={'/team/'+item.team1_name.toLowerCase().replace(/ /g,'_').replace(/[^\w-]+/g,'')}>
+                        <Link href={'/team/'+item.team1_name.toLowerCase()}>
                             <a>{item.team1_name}</a>
                         </Link>
                     </div>
@@ -30,7 +30,7 @@ const Jadwal = ({nama,game}) => {
                         <h1>? : ?</h1>
                     </div>
                     <div className='w-1/3 text-right'>
-                        <Link href={'/team/'+item.team2_name.toLowerCase().replace(/ /g,'_').replace(/[^\w-]+/g,'')}>
+                        <Link href={'/team/'+item.team2_name.toLowerCase()}>
                             <a>{item.team2_name}</a>
                         </Link>
                     </div>
