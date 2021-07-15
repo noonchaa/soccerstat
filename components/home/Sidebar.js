@@ -21,8 +21,8 @@ const Sidebar = ({team}) => {
 
     return(
         <div className='bg-gray-900 overflow-y-auto overscroll-none h-screen w-72'>
-            <div className='w-64 text-center'>
-                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375'>
+            <div className='w-64 text-center pt-12'>
+                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
                     <Image src='/250x350.jpg' width={250} height={350} alt='advertisement' className='mx-auto'/>
                 </a>
             </div>
@@ -37,8 +37,8 @@ const Sidebar = ({team}) => {
                 </Link>
                 ))}
             </div>
-            <div className='w-64 text-center pb-8'>
-                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375'>
+            <div className='w-64 text-center'>
+                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
                 <Image src='/300x250.png' width={300} height={250} alt='advertisment'/>
                 </a>
             </div>

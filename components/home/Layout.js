@@ -16,16 +16,16 @@ const Layout = ({children,title,desc,keyw}) => {
             <link rel='icon' href='/favicon.ico'/>
         </Head>
         <Navbar team={league}/>
-        <main className='mt-12'>
+        <main>
             <div className='flex relative z-20'>
-                <div className='flex-none w-64 hidden lg:block self-start sticky top-12'>
+                <div className='flex-none w-64 hidden lg:block self-start sticky top-0'>
                     <Sidebar team={league}/>
                 </div>
-                <div className='w-full z-40 bg-gray-900'>
-                    {children}
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375'>
+                <div className='w-full z-40 bg-gray-900 pt-12'>
+                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
                     <Image src='/1200x150.jpg' width={1200} height={150} alt='ads'/>
                     </a>
+                    {children}
                     <footer className='text-center border-t border-white py-4 bg-gray-900'>
                         <h1 className='text-sm font-semibold italic'>
                             Planet Football<span> @{new Date().getFullYear()}</span>
@@ -33,7 +33,7 @@ const Layout = ({children,title,desc,keyw}) => {
                     </footer>
                 </div>
                 <div className='flex-none w-40 hidden md:block self-start sticky top-12'>
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375'>
+                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
                     <Image src='/160x600.jpg' width={160} height={600} alt='ads'/>
                     </a>
                 </div>
