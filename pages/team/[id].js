@@ -18,7 +18,7 @@ export const getStaticPaths = async () => {
     const libertadores = Object.values(data.sport[1].region[60001].competition[2988].game)
     const ArrayFunc = (isi) => {
         const testArray = isi.map(item=>item.team1_name).concat(isi.map(item=>item.team2_name))
-        return testArray.map(item=>item.toLowerCase().replace(/ /g,'_').replace(/[^\w-]+/g,''))
+        return testArray.map(item=>item.toLowerCase().replace(/ /g,'_'))
     }
     const ArrayTeam = [champions,laliga,premiere,championship,bundesliga,ligue1,serieAbrazil,ligaProfesional,eredivisie,premiereRus,libertadores,mls]
     const finalArray = ArrayTeam.map(item=>ArrayFunc(item)).flat()
