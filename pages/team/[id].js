@@ -1,5 +1,6 @@
 import Layout from '../../components/home/Layout'
 import {FaGlobeEurope, FaYoutube, FaFacebook, FaInstagramSquare, FaTwitter} from 'react-icons/fa'
+import {useRouter} from 'next/router'
 
 export const getStaticPaths = async () => {
     const res = await fetch('https://feedodds.com/feed/json?language=eng&timeZone=Asia/Jakarta&brandId=4&key=445f6b52b11d40b959a78b38a3651694&filterData[type][]=0&filterData[type][]=2&filterData[sport][]=1')
@@ -21,20 +22,25 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps({ params }) {
     const res = await fetch(`https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=${params.id}`)
+    const liga = await fetch('https://feedodds.com/feed/json?language=eng&timeZone=Asia/Jakarta&brandId=4&key=445f6b52b11d40b959a78b38a3651694&filterData[type][]=0&filterData[type][]=2&filterData[sport][]=1')
     const data = await res.json()
+    const dataLiga = await liga.json()
     return {
         props: {
-            team: data.teams
+            team: data.teams,
+            allMatchs : dataLiga.sport[1].region
         },
         revalidate:1
     }
 }
 
-const Team = ({team}) => {
+const Team = ({team,allMatchs}) => {
+    const router = useRouter()
+    const allTeams = !allMatchs?null:Object.values(allMatchs)
 
-    if(team==null||team.filter((item=>item.strSport=='Soccer'))[0]==undefined){
+    if(team==null||team.filter((item=>item.strSport=='Soccer'))[0]==undefined||router.isFallback){
         return(
-            <Layout>
+            <Layout allComp={allTeams.slice(1)}>
                 <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto'>
                     <img src='/logo.svg' alt='logo' width='100%' height='auto' className='animate-pulse'/>
                     <h1 className='text-center text-2xl py-4 font-bold'>Team Not Found</h1>
@@ -46,7 +52,7 @@ const Team = ({team}) => {
     const sortedTeam = team.filter((item=>item.strSport=='Soccer'))[0]
 
     return(
-        <Layout title={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam} desc={sortedTeam.strDescriptionEN==undefined?'':sortedTeam.strDescriptionEN.slice(0,500)} keyw={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam+', '+sortedTeam.strLeague+', '+sortedTeam.strLeague2+', '+sortedTeam.strLeague3+', '+sortedTeam.strCountry+', '+sortedTeam.strStadium}>
+        <Layout title={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam} desc={sortedTeam.strDescriptionEN==undefined?'':sortedTeam.strDescriptionEN.slice(0,500)} keyw={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam+', '+sortedTeam.strLeague+', '+sortedTeam.strLeague2+', '+sortedTeam.strLeague3+', '+sortedTeam.strCountry+', '+sortedTeam.strStadium} allComp={allTeams.slice(1)}>
             <div className='flex flex-col md:flex-row p-4 md:items-center'>
                 <div className='md:w-1/3 self-start'>
                     <h1 className='text-2xl font-bold py-2'>{sortedTeam.strTeam==undefined?'':sortedTeam.strTeam}<span className='uppercase'> {sortedTeam.strTeamShort==null?'':' - '+sortedTeam.strTeamShort}</span></h1>

@@ -2,9 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
-import { league } from '../../lib/dataTeam'
 
-const Layout = ({children,title,desc,keyw}) => {
+const Layout = ({children,title,desc,keyw,allComp}) => {
     return(
         <>
         <Head>
@@ -15,11 +14,11 @@ const Layout = ({children,title,desc,keyw}) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <link rel='icon' href='/favicon.ico'/>
         </Head>
-        <Navbar team={league}/>
+        <Navbar team={allComp}/>
         <main>
             <div className='flex relative z-20'>
                 <div className='flex-none w-64 hidden lg:block self-start sticky top-0'>
-                    <Sidebar team={league}/>
+                    <Sidebar team={allComp}/>
                 </div>
                 <div className='w-full z-40 bg-gray-900 pt-12'>
                     <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>

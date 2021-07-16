@@ -4,6 +4,8 @@ import {FaBars} from 'react-icons/fa'
 import {MdClose} from 'react-icons/md'
 import { useState } from 'react'
 import {useRouter} from 'next/router'
+import Region from './Region'
+import Liga from './Liga'
 
 export default function Navbar({team}){
     const [open, setOpen] = useState(false)
@@ -35,13 +37,11 @@ export default function Navbar({team}){
         </div>
         <div className='flex flex-col'>
             {team.map((item,index)=>(
-            <Link href={'/league/'+item.id} key={index}>
-                <a className={router.asPath==='/league/'+item.id?
-                    'px-4 py-2 font-medium italic bg-red-600 text-center':
-                    'pl-4 py-2 font-medium'}>
-                    {item.name}
-                </a>
-            </Link>
+                <div key={index} className='px-4 py-2 even:bg-gray-800 sticky top-12 bg-gray-900'>
+                    <Region alias={item.alias}>
+                        <Liga liga={item.competition}/>
+                    </Region>
+                </div>
             ))}
         </div>
         <div className='w-full text-center'>
