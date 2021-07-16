@@ -9,8 +9,8 @@ const Layout = ({children,title,desc,keyw}) => {
         <>
         <Head>
             <title>Planet Football {title}</title>
-            <meta name='description' content={'Planet Football '+desc}/>
-            <meta name='keywords' content={'Planet Football, '+keyw}/>
+            <meta name='description' content={desc==undefined?'Planet Football UEFA Champions League Premier League La Liga Serie A Bundesliga Ligue 1 Eredivisie Liga NOS FIFA World Cup EURO EFL Championship Campeonato Brasileiro Série A Copa Libertadores':'Planet Football'+desc}/>
+            <meta name='keywords' content={keyw==undefined?'Planet Football, UEFA Champions League, Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Eredivisie, Liga NOS, FIFA World Cup, EURO, EFL Championship, Campeonato Brasileiro Série A, Copa Libertadores':'Planet Football, '+keyw}/>
             <meta name="author" content="Suyono"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <link rel='icon' href='/favicon.ico'/>

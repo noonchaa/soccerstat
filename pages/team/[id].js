@@ -4,26 +4,12 @@ import {FaGlobeEurope, FaYoutube, FaFacebook, FaInstagramSquare, FaTwitter} from
 export const getStaticPaths = async () => {
     const res = await fetch('https://feedodds.com/feed/json?language=eng&timeZone=Asia/Jakarta&brandId=4&key=445f6b52b11d40b959a78b38a3651694&filterData[type][]=0&filterData[type][]=2&filterData[sport][]=1')
     const data = await res.json()
-    const champions = Object.values(data.sport[1].region[20001].competition[566].game)
-    const laliga = Object.values(data.sport[1].region[2150001].competition[545].game)
-    const premiere = Object.values(data.sport[1].region[2570001].competition[538].game)
-    const bundesliga = Object.values(data.sport[1].region[900001].competition[541].game)
-    const ligue1 = Object.values(data.sport[1].region[830001].competition[548].game)
-    const serieAbrazil = Object.values(data.sport[1].region[390001].competition[1792].game)
-    const ligaProfesional = Object.values(data.sport[1].region[180001].competition[1685].game)
-    const eredivisie = Object.values(data.sport[1].region[1640001].competition[1957].game)
-    const mls = Object.values(data.sport[1].region[2420001].competition[3025].game)
-    const premiereRus = Object.values(data.sport[1].region[1900001].competition[1993].game)
-    const championship = Object.values(data.sport[1].region[2570001].competition[539].game)
-    const libertadores = Object.values(data.sport[1].region[60001].competition[2988].game)
-    const ArrayFunc = (isi) => {
-        const testArray = isi.map(item=>item.team1_name).concat(isi.map(item=>item.team2_name))
-        return testArray.map(item=>item.toLowerCase())
-    }
-    const ArrayTeam = [champions,laliga,premiere,championship,bundesliga,ligue1,serieAbrazil,ligaProfesional,eredivisie,premiereRus,libertadores,mls]
-    const finalArray = ArrayTeam.map(item=>ArrayFunc(item)).flat()
+
+    const allMatchs = data.sport[1].region
+    const allGame = Object.values(allMatchs).slice(1).map(comp=>comp.competition).flatMap(liga=>Object.values(liga)).flatMap(match=>Object.values(match.game))
+    const totalTeam = allGame.map(team1=>team1.team1_name).concat(allGame.map(team2=>team2.team2_name)).filter(allteam=>allteam!=undefined)
     
-    const paths = finalArray.map((item) => ({
+    const paths = totalTeam.map((item) => ({
       params: { id: item },
     }))
 
@@ -51,7 +37,7 @@ const Team = ({team}) => {
             <Layout>
                 <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto'>
                     <img src='/logo.svg' alt='logo' width='100%' height='auto' className='animate-pulse'/>
-                    <h1 className='text-center text-2xl py-4 font-bold'>Page Not Found</h1>
+                    <h1 className='text-center text-2xl py-4 font-bold'>Team Not Found</h1>
                     <h1 className='text-center text-xl font-semibold'>Please Chose Another Page</h1>
                 </div>
             </Layout>
