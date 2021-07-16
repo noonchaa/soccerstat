@@ -40,7 +40,7 @@ const Team = ({team,allMatchs}) => {
 
     if(team==null||team.filter((item=>item.strSport=='Soccer'))[0]==undefined||router.isFallback){
         return(
-            <Layout allComp={allTeams.slice(1)}>
+            <Layout allComp={allTeams==null?null:allTeams.slice(1)}>
                 <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto'>
                     <img src='/logo.svg' alt='logo' width='100%' height='auto' className='animate-pulse'/>
                     <h1 className='text-center text-2xl py-4 font-bold'>Team Not Found</h1>
@@ -52,7 +52,7 @@ const Team = ({team,allMatchs}) => {
     const sortedTeam = team.filter((item=>item.strSport=='Soccer'))[0]
 
     return(
-        <Layout title={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam} desc={sortedTeam.strDescriptionEN==undefined?'':sortedTeam.strDescriptionEN.slice(0,500)} keyw={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam+', '+sortedTeam.strLeague+', '+sortedTeam.strLeague2+', '+sortedTeam.strLeague3+', '+sortedTeam.strCountry+', '+sortedTeam.strStadium} allComp={allTeams.slice(1)}>
+        <Layout title={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam} desc={sortedTeam.strDescriptionEN==undefined?'':sortedTeam.strDescriptionEN.slice(0,500)} keyw={sortedTeam.strTeam==undefined?'':sortedTeam.strTeam+', '+sortedTeam.strLeague+', '+sortedTeam.strLeague2+', '+sortedTeam.strLeague3+', '+sortedTeam.strCountry+', '+sortedTeam.strStadium} allComp={allTeams==null?null:allTeams.slice(1)}>
             <div className='flex flex-col md:flex-row p-4 md:items-center'>
                 <div className='md:w-1/3 self-start'>
                     <h1 className='text-2xl font-bold py-2'>{sortedTeam.strTeam==undefined?'':sortedTeam.strTeam}<span className='uppercase'> {sortedTeam.strTeamShort==null?'':' - '+sortedTeam.strTeamShort}</span></h1>

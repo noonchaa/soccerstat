@@ -25,7 +25,7 @@ const Vbet = ({allMatchs}) => {
 
     if(!allMatchs){
         return(
-            <Layout allComp={allTeams.slice(1)}>
+            <Layout allComp={allTeams==null?null:allTeams.slice(1)}>
                 <div className='p-4 w-full md:w-2/3 xl:w-1/2 mx-auto'>
                     <img src='/logo.svg' alt='logo' width='100%' height='auto' className='animate-pulse'/>
                     <h1 className='text-center text-2xl py-4 font-bold'>Page Not Found</h1>
@@ -36,7 +36,7 @@ const Vbet = ({allMatchs}) => {
     }
 
     return(
-        <Layout allComp={allTeams.slice(1)}>
+        <Layout allComp={allTeams==null?null:allTeams.slice(1)}>
             <div className='px-4 py-2'>
                 <a href='/' className='md:text-xl font-bold'>
                     Please <HiRefresh className='inline'/> reload page if data outdated

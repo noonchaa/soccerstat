@@ -36,13 +36,15 @@ export default function Navbar({team}){
             </a>
         </div>
         <div className='flex flex-col'>
-            {team.map((item,index)=>(
+            {team==null?'':
+            team.map((item,index)=>(
                 <div key={index} className='px-4 py-2 even:bg-gray-800 sticky top-12 bg-gray-900'>
                     <Region alias={item.alias}>
                         <Liga liga={item.competition}/>
                     </Region>
                 </div>
-            ))}
+            ))
+            }
         </div>
         <div className='w-full text-center'>
             <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
