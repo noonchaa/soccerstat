@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import {useRouter} from 'next/router'
 import Region from './Region'
 import Liga from './Liga'
 
 const Sidebar = ({team}) => {
-    const router = useRouter()
 
     return(
         <div className='bg-gray-900 overflow-y-auto overscroll-none h-screen w-72'>
@@ -16,9 +14,9 @@ const Sidebar = ({team}) => {
             <div className='flex flex-col w-64'>
                 {team==null?'':
                 team.map((item,index)=>(
-                    <div key={index} className='px-4 py-2 even:bg-gray-800 sticky top-12 bg-gray-900'>
-                        <Region alias={item.alias}>
-                            <Liga liga={item.competition}/>
+                    <div key={index} className='even:bg-gray-800 bg-gray-900'>
+                        <Region alias={item.alias} regionId={item.id}>
+                            <Liga liga={item.competition} regionId={item.id}/>
                         </Region>
                     </div>
                 ))

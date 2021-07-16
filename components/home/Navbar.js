@@ -3,13 +3,11 @@ import Image from 'next/image'
 import {FaBars} from 'react-icons/fa'
 import {MdClose} from 'react-icons/md'
 import { useState } from 'react'
-import {useRouter} from 'next/router'
 import Region from './Region'
 import Liga from './Liga'
 
 export default function Navbar({team}){
     const [open, setOpen] = useState(false)
-    const router = useRouter()
 
     return(
         <>
@@ -38,9 +36,11 @@ export default function Navbar({team}){
         <div className='flex flex-col'>
             {team==null?'':
             team.map((item,index)=>(
-                <div key={index} className='px-4 py-2 even:bg-gray-800 sticky top-12 bg-gray-900'>
-                    <Region alias={item.alias}>
-                        <Liga liga={item.competition}/>
+                <div key={index} className='even:bg-gray-800 bg-gray-900'>
+                    <Region alias={item.alias} regionId={item.id}>
+                        <div onClick={()=>setOpen(!open)}>
+                        <Liga liga={item.competition} regionId={item.id}/>
+                        </div>
                     </Region>
                 </div>
             ))
