@@ -8,9 +8,9 @@ const Region = ({alias,children, regionId}) => {
 
     return(
         <div>
-            <div className={router.asPath=='/league/'+regionId?'px-4 py-2 flex font-bold text-xl items-center cursor-pointer bg-red-600':'px-4 py-2 flex font-bold text-xl items-center cursor-pointer'} onClick={()=>setOpen(!open)}>
-                <h1 className='capitalize w-full'>{alias}</h1>
-                {open==false?<BsArrowsCollapse className='w-7 h-7'/>:<BsArrowsExpand className='w-7 h-7'/>}
+            <div className={router.asPath=='/league/'+regionId?'px-4 py-2 flex font-bold text-xl items-center cursor-pointer bg-black':'px-4 py-2 flex font-bold text-xl items-center cursor-pointer'} onClick={()=>setOpen(!open)}>
+                <h1 className='capitalize w-full hover:text-red-600'>{alias}</h1>
+                {open==false?<BsArrowsCollapse className='w-7 h-7'/>:<BsArrowsExpand className='w-7 h-7 text-red-600'/>}
             </div>
             {open==false?'':
                 children

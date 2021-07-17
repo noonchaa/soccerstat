@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Layout from "../components/Layout"
 import { useRouter } from "next/router"
+import Loading from "../components/Loading"
 
 
 export const getStaticProps = async () => {
@@ -22,22 +23,21 @@ const Match = ({liga}) => {
     const [market , setMarket] = useState([])
     const [detail, setDetail] = useState(null)
     const [fullDetail,setFulldetail] = useState(null)
-    const [load, setLoad] = useState('...Loading...')
+    const [show, setShow] = useState(false)
 
     const getMatch = async () => {
         const resMarket = await fetch(`/api/market${router.asPath.slice(6)}`)
         const resDetail = await fetch(`https://www.thesportsdb.com/api/v1/json/1/searchevents.php?e=${router.query.team1}_vs_${router.query.team2}`)
         const dataDetail = await resDetail.json()
         const dataMarket = await resMarket.json()
-        setMarket(dataMarket)
         const matchDetail = dataDetail.event == null ? null : dataDetail.event[0]
         setDetail(matchDetail)
         setFulldetail(dataDetail.event)
+        setTimeout(()=>{
+            setMarket(dataMarket)
+        },3000)
     }
     useEffect(()=>{
-        setTimeout(()=>{
-            setLoad('Sorry market detail not found')
-        },5000)
         getMatch()
     },[])
 
@@ -81,17 +81,32 @@ const Match = ({liga}) => {
             }
             <h1 className='text-2xl text-center font-bold py-2'>Markets</h1>
             {!market.length?
-            <h1 className='text-center font-semibold text-2xl animate-pulse'>
-             {load}
-            </h1>
+            <Loading/>
             :
-            market.map((item,index)=>(
+            <>
+            {market.slice(0,10).map((item,index)=>(
                 <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank' key={index}>
                     <div className='bg-gray-700 even:bg-gray-800 mb-4 border border-white'>
                         <h1 className='text-center font-semibold px-4 py-2 border border-white bg-red-600'>{item.name}</h1>
                         <div className='grid grid-flow-row grid-cols-3'>
                             {item.events.map((bet,indexBet)=>(
-                                <div className='text-center border border-white' key={indexBet}>
+                                <div className='text-center border border-white hover:bg-black' key={indexBet}>
+                                    <h1 className='font-semibold'>{bet.name} {bet.base==''?'':': '+bet.base}</h1>
+                                    <h1 className='font-bold'>{bet.price}</h1>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </a>
+            ))}
+            {show==false?'':
+            market.slice(10).map((item,index)=>(
+                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank' key={index}>
+                    <div className='bg-gray-700 even:bg-gray-800 mb-4 border border-white'>
+                        <h1 className='text-center font-semibold px-4 py-2 border border-white bg-red-600'>{item.name}</h1>
+                        <div className='grid grid-flow-row grid-cols-3'>
+                            {item.events.map((bet,indexBet)=>(
+                                <div className='text-center border border-white hover:bg-black' key={indexBet}>
                                     <h1 className='font-semibold'>{bet.name} {bet.base==''?'':': '+bet.base}</h1>
                                     <h1 className='font-bold'>{bet.price}</h1>
                                 </div>
@@ -100,6 +115,13 @@ const Match = ({liga}) => {
                     </div>
                 </a>
             ))
+            }
+            <div className={!market.slice(10).length||show==true?'hidden':'block cursor-pointer'}>
+                <h1 className='text-2xl bg-black text-center font-bold py-4 mb-4' onClick={()=>setShow(!show)}>
+                    Load {market.slice(10).length} More
+                </h1>
+            </div>
+            </>
             }
         </Layout>
     )

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Layout from "../components/Layout"
 import Live from "../components/Live"
+import Loading from "../components/Loading"
 
 
 export const getStaticProps = async () => {
@@ -23,10 +24,12 @@ const Home = ({liga}) => {
 
     const getLive = async () => {
         const res = await fetch('/api/live')
-        const resMatch = await fetch('/api/match')
-        const dataMatch = await resMatch.json()
         const data = await res.json()
         setLive(Object.values(data))
+    }
+    const getMatch = async () => {
+        const resMatch = await fetch('/api/match')
+        const dataMatch = await resMatch.json()
         setMatch(Object.values(dataMatch))
     }
 
@@ -36,7 +39,7 @@ const Home = ({liga}) => {
     
     return(
         <Layout liga={liga}>
-            {!live.length?'':
+            {!live.length?<Loading/>:
                 live.map((item)=>(
                     Object.values(item.competition).map((liga,index)=>(
                         <div className='bg-gray-700 even:bg-gray-800 mb-4' key={index}>
@@ -54,16 +57,21 @@ const Home = ({liga}) => {
             {!match.length?'':
                 match.map((item)=>(
                     Object.values(item.competition).map((liga,index)=>(
-                        <div className='bg-gray-700 even:bg-gray-800 mb-4' key={index}>
-                        <div className='py-2 px-4 flex items-center justify-center bg-red-600'>
-                            <h1 className='pl-2 text-xl italic font-bold'>{liga.name}</h1>
-                            <h1 className='pl-2 text-xl font-bold'>{item.alias}</h1>
-                        </div>
+                        <div className='mb-4' key={index}>
+                            <div className='py-2 px-4 flex items-center justify-center bg-red-600'>
+                                <h1 className='pl-2 text-xl italic font-bold'>{liga.name}</h1>
+                                <h1 className='pl-2 text-xl font-bold'>{item.alias}</h1>
+                            </div>
                             <Live game={liga.game} />
                         </div>
                     ))
                 ))
             }
+            <div className={!match.length?'block cursor-pointer':'hidden'}>
+                <h1 className='text-2xl bg-black text-center font-bold py-4 mb-4' onClick={()=>getMatch()}>
+                    Load More
+                </h1>
+            </div>
         </Layout>
     )
 }
