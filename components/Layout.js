@@ -1,24 +1,24 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Navbar from './Navbar'
 import Sidebar from './Sidebar'
+import Topbar from './Topbar'
 
-const Layout = ({children,title,desc,keyw,allComp}) => {
+const Layout = ({children,title,liga}) => {
     return(
         <>
         <Head>
             <title>Planet Football {title}</title>
-            <meta name='description' content={desc==undefined?'Planet Football UEFA Champions League Premier League La Liga Serie A Bundesliga Ligue 1 Eredivisie Liga NOS FIFA World Cup EURO EFL Championship Campeonato Brasileiro Série A Copa Libertadores':'Planet Football'+desc}/>
-            <meta name='keywords' content={keyw==undefined?'Planet Football, UEFA Champions League, Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Eredivisie, Liga NOS, FIFA World Cup, EURO, EFL Championship, Campeonato Brasileiro Série A, Copa Libertadores':'Planet Football, '+keyw}/>
+            <meta name='description' content='Planet Football UEFA Champions League Premier League La Liga Serie A Bundesliga Ligue 1 Eredivisie Liga NOS FIFA World Cup EURO EFL Championship Campeonato Brasileiro Série A Copa Libertadores Planet Football'/>
+            <meta name='keywords' content='Planet Football, UEFA Champions League, Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Eredivisie, Liga NOS, FIFA World Cup, EURO, EFL Championship, Campeonato Brasileiro Série A, Copa Libertadores'/>
             <meta name="author" content="Suyono"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <link rel='icon' href='/favicon.ico'/>
         </Head>
-        <Navbar team={allComp}/>
         <main>
+        <Topbar liga={liga}/>
             <div className='flex relative z-20'>
                 <div className='flex-none w-64 hidden lg:block self-start sticky top-0'>
-                    <Sidebar team={allComp}/>
+                    <Sidebar liga={liga}/>
                 </div>
                 <div className='w-full z-40 bg-gray-900 pt-12'>
                     <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
@@ -32,9 +32,11 @@ const Layout = ({children,title,desc,keyw,allComp}) => {
                     </footer>
                 </div>
                 <div className='flex-none w-40 hidden md:block self-start sticky top-12'>
+                    <div className='bg-gray-900 overflow-y-auto overscroll-none h-screen w-40'>
                     <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
                     <Image src='/160x600.jpg' width={160} height={600} alt='ads'/>
                     </a>
+                    </div>
                 </div>
             </div>
         </main>

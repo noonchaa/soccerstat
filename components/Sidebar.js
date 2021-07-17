@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Region from './Region'
 import Liga from './Liga'
 
-const Sidebar = ({team}) => {
+const Sidebar = ({liga}) => {
 
     return(
         <div className='bg-gray-900 overflow-y-auto overscroll-none h-screen w-72'>
@@ -12,11 +12,11 @@ const Sidebar = ({team}) => {
                 </a>
             </div>
             <div className='flex flex-col w-64'>
-                {team==null?'':
-                team.map((item,index)=>(
+                {liga==null?'':
+                liga.map((item,index)=>(
                     <div key={index} className='even:bg-gray-800 bg-gray-900'>
                         <Region alias={item.alias} regionId={item.id}>
-                            <Liga liga={item.competition} regionId={item.id}/>
+                            <Liga liga={item.liga} regionId={item.id}/>
                         </Region>
                     </div>
                 ))
