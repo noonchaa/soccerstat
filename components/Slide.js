@@ -11,19 +11,10 @@ const Slide = () => {
         }
     },[slide])
     return(
-        slide==false?
         <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-        <div className='animate-pulse overflow-hidden text-center'>
+        <div className='animate-pulse overflow-hidden text-center hidden md:block'>
             <h1 className='font-semibold'>
-                Special Promo : Free Bet 20 Euro *
-            </h1>
-        </div>
-        </a>
-        :
-        <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-        <div className='animate-pulse overflow-hidden text-center'>
-            <h1 className='font-semibold'>
-                Welcome Bonus : Double your deposit 100% *
+                {slide==false?'Special Promo : Free Bet 20 Euro *':'Welcome Bonus : Double your deposit 100% *'}
             </h1>
         </div>
         </a>
