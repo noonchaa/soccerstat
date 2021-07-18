@@ -1,9 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 
 const Layout = ({children,title,liga}) => {
+    const [show,setShow] = useState(false)
+    useEffect(()=>{
+        setTimeout(()=>{
+            setShow(true)
+        },5000)
+    },[])
+    
     return(
         <>
         <Head>
@@ -15,6 +23,14 @@ const Layout = ({children,title,liga}) => {
             <link rel='icon' href='/favicon.ico'/>
         </Head>
         <main>
+            <div className={show==false?'hidden':'fixed top-20 left-0 w-full right-0 mx-auto z-50 max-w-screen-md'}>
+                <div className='relative max-w-xl bg-gray-200 mx-auto'>
+                    <h1 className='absolute right-2 font-medium cursor-pointer text-2xl' onClick={()=>setShow(!show)}>X</h1>
+                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
+                    <img src='/pop.jpg' width='100%' height='auto' alt='ads'/>
+                    </a>
+                </div>
+            </div>
         <Topbar liga={liga}/>
             <div className='flex relative z-20'>
                 <div className='flex-none w-64 hidden lg:block self-start sticky top-0'>

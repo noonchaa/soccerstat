@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Region from './Region'
 import Liga from './Liga'
 import { useRouter } from 'next/router'
+import Slide from './Slide'
 
 const Topbar = ({liga}) => {
     const router = useRouter()
@@ -74,9 +75,10 @@ const Topbar = ({liga}) => {
                 </Link>
                 </div>
             </div>
+            <Slide/>
             <div className='hidden md:block md:flex-none w-40 md:text-center'>
                 <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank' className='rounded-lg bg-red-600 font-semibold uppercase text-sm px-2 py-1'>
-                    deposit + 200%
+                    Register Now
                 </a>
             </div>
         </header>

@@ -85,19 +85,22 @@ const Match = ({liga}) => {
             :
             <>
             {market.slice(0,10).map((item,index)=>(
-                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank' key={index}>
-                    <div className='bg-gray-700 even:bg-gray-800 mb-4 border border-white'>
+                    <div className='bg-gray-700 even:bg-gray-800 mb-4 border border-white' key={index}>
                         <h1 className='text-center font-semibold px-4 py-2 border border-white bg-red-600'>{item.name}</h1>
                         <div className='grid grid-flow-row grid-cols-3'>
                             {item.events.map((bet,indexBet)=>(
-                                <div className='text-center border border-white hover:bg-black' key={indexBet}>
+                                <div className='text-center border border-white relative' key={indexBet}>
+                                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
                                     <h1 className='font-semibold'>{bet.name} {bet.base==''?'':': '+bet.base}</h1>
                                     <h1 className='font-bold'>{bet.price}</h1>
+                                    <div className='absolute w-full h-full top-0 left-0 right-0 bottom-0 bg-black flex items-center justify-center transition-opacity duration-1000 opacity-0 hover:opacity-100'>
+                                        <h1 className='font-bold text-red-600 text-xl'>Place Bet</h1>
+                                    </div>
+                                </a>
                                 </div>
                             ))}
                         </div>
                     </div>
-                </a>
             ))}
             {show==false?'':
             market.slice(10).map((item,index)=>(
