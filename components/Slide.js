@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 
 const Slide = () => {
     const [slide,setSlide] = useState(false)
+
     useEffect(()=>{
-        setTimeout(()=>{
-            setSlide(!slide)
-        },7000)
+        const timer = setInterval(()=>setSlide(!slide),7000)
         return ()=>{
-            clearTimeout()
+            clearInterval(timer)
         }
     },[slide])
+    
     return(
         <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
         <div className='animate-pulse overflow-hidden text-center hidden md:block'>

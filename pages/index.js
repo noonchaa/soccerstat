@@ -43,7 +43,7 @@ const Home = ({liga}) => {
                 live.map((item)=>(
                     Object.values(item.competition).map((liga,index)=>(
                         <div className='bg-gray-700 even:bg-gray-800 mb-4' key={index}>
-                            <div className='py-2 px-4 flex items-center justify-center bg-red-600'>
+                            <div className='py-2 px-4 flex items-center justify-center bg-red-600 sticky top-12'>
                                 <div className='w-5 h-5 rounded-full bg-green-500 animate-pulse'></div>
                                 <h1 className='pl-2 text-sm italic'>LIVE</h1>
                                 <h1 className='pl-2 text-xl italic font-bold'>{liga.name}</h1>
@@ -58,7 +58,7 @@ const Home = ({liga}) => {
                 match.map((item)=>(
                     Object.values(item.competition).map((liga,index)=>(
                         <div className='mb-4' key={index}>
-                            <div className='py-2 px-4 flex items-center justify-center bg-red-600'>
+                            <div className='py-2 px-4 flex items-center justify-center bg-red-600 sticky top-12'>
                                 <h1 className='pl-2 text-xl italic font-bold'>{liga.name}</h1>
                                 <h1 className='pl-2 text-xl font-bold'>{item.alias}</h1>
                             </div>
