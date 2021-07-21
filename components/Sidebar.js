@@ -1,15 +1,13 @@
-import Image from 'next/image'
 import Region from './Region'
 import Liga from './Liga'
+import AdsImage from './AdsImage'
 
 const Sidebar = ({liga}) => {
 
     return(
         <div className='bg-gray-900 overflow-y-auto overscroll-none h-screen w-72'>
             <div className='w-64 text-center pt-12'>
-                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                    <Image src='/250x350.jpg' width={250} height={350} alt='advertisement' className='mx-auto'/>
-                </a>
+                <AdsImage gb1='leftTop1.jpg' gb2='leftTop2.png' wd={250} tg={350}/>
             </div>
             <div className='flex flex-col w-64'>
                 {liga==null?'':
@@ -23,9 +21,7 @@ const Sidebar = ({liga}) => {
                 }
             </div>
             <div className='w-64 text-center'>
-                <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                <Image src='/300x250.png' width={300} height={250} alt='advertisment'/>
-                </a>
+                <AdsImage gb1='leftBot1.png' gb2='leftBot2.jpg' wd={300} tg={250}/>
             </div>
         </div>
     )

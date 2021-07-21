@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import {FaBars} from 'react-icons/fa'
 import {MdClose} from 'react-icons/md'
 import { useEffect, useState } from 'react'
@@ -7,6 +6,7 @@ import Region from './Region'
 import Liga from './Liga'
 import { useRouter } from 'next/router'
 import Slide from './Slide'
+import AdsImage from './AdsImage'
 
 const Topbar = ({liga}) => {
     const router = useRouter()
@@ -31,9 +31,7 @@ const Topbar = ({liga}) => {
                 </div>
 
                 <div className='w-full text-center'>
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                    <Image src='/300x250.png' width={300} height={250} alt='advertisement' className='mx-auto'/>
-                    </a>
+                    <AdsImage gb1='leftTop1.jpg' gb2='leftTop2.png' wd={250} tg={350}/>
                 </div>
 
                 <div className='md:hidden p-4 text-center animate-pulse'>
@@ -55,9 +53,7 @@ const Topbar = ({liga}) => {
                 </div>
                 
                 <div className='w-full text-center'>
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                    <Image src='/250x350.jpg' width={250} height={350} alt='advertisment' className='mx-auto'/>
-                    </a>
+                <AdsImage gb1='leftBot1.png' gb2='leftBot2.jpg' wd={300} tg={250}/>
                 </div>
 
             </div>

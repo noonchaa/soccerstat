@@ -1,15 +1,11 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import AdsImage from './AdsImage'
 import Sidebar from './Sidebar'
 import Topbar from './Topbar'
 
 const Layout = ({children,title,liga}) => {
     const [show,setShow] = useState(false)
-    const [ads,setAds] = useState(false)
-    const [timer,setTimer] = useState(0)
-    const listAds = ['1.gif','2.jpg','3.gif','4.jpg','5.gif','6.png','7.jpg','8.png','9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.png','17.jpg','18.gif','19.jpg','20.jpg']
-    const showAds = listAds[timer]
 
     useEffect(()=>{
         
@@ -17,22 +13,6 @@ const Layout = ({children,title,liga}) => {
             setShow(true)
         },5000)
     },[])
-
-    useEffect(()=>{
-        const timer = setInterval(()=>setAds(!ads),6000)
-        return () => {
-            clearInterval(timer)
-        }
-    },[ads])
-
-    useEffect(()=>{
-        const adsChange = setInterval(()=>{
-            timer >= 19 ? setTimer(0) : setTimer(timer+1)
-        },5000)
-        return () => {
-            clearInterval(adsChange)
-        }
-    },[timer])
     
     return(
         <>
@@ -61,17 +41,11 @@ const Layout = ({children,title,liga}) => {
                     <Sidebar liga={liga}/>
                 </div>
                 <div className='w-full z-40 bg-gray-900 pt-12'>
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                        <div  className='sticky top-12 z-0'>
-                            <Image src={'/728/'+showAds} width={1200} height={150} alt='ads'/>
-                        </div>
-                    </a>
+                    <AdsImage gb1='top1.gif' gb2='top2.jpg' wd={1200} tg={150}/>
                     <div className='relative z-20 bg-gray-900'>
                     {children}
                     </div>
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                    <Image src={'/728/'+showAds} width={1200} height={150} alt='ads'/>
-                    </a>
+                    <AdsImage gb1='bot1.jpg' gb2='bot2.jpg' wd={1200} tg={150}/>
                     <footer className='text-center border-t border-white py-4 bg-gray-900'>
                         <h1 className='text-sm font-semibold italic'>
                             Planet Football<span> @{new Date().getFullYear()}</span>
@@ -80,9 +54,7 @@ const Layout = ({children,title,liga}) => {
                 </div>
                 <div className='flex-none w-40 hidden md:block self-start sticky top-12'>
                     <div className='bg-gray-900 overflow-y-auto overscroll-none h-screen w-40'>
-                    <a href='https://www.vshortly.com/affiliates/?btag=512950_l135375' target='_blank'>
-                    <Image src='/160x600.jpg' width={160} height={600} alt='ads'/>
-                    </a>
+                        <AdsImage gb1='right1.jpg' gb2='right2.png' wd={160} tg={600}/>
                     </div>
                 </div>
             </div>
